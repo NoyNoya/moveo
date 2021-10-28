@@ -1,13 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getDatabase,  } from "firebase/database";
-import { getAuth, onAuthStateChanged, getRedirectResult } from 'firebase/auth';
-import { collection, query, where, getDocs, getFirestore } from "firebase/firestore";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
+// TODO: Take from key vault/secure place during run time:
 const firebaseApp = initializeApp({
     apiKey: 'AIzaSyBwFwmSIhbxrKVV4Kn4jFRqa42vMkNlWdI',
     authDomain: "moveo-95e24.firebaseapp.com",
@@ -16,27 +15,29 @@ const firebaseApp = initializeApp({
     messagingSenderId: "620622526026",
     appId: "1:620622526026:web:e1aa2a9c805293b3bf58b3"
   });
+  
+const auth = getAuth();
 
-  const auth = getAuth();
-  onAuthStateChanged(auth, user => { console.log(user); });
+onAuthStateChanged(auth, user => {
+    console.log(user); 
+});
 
-const signInWithEmailAndPassword = async (email, password) => {
+const db = getFirestore(firebaseApp);
+
+
+const signIn = async (email, password) => {
     try {
-        const db = getFirestore(firebaseApp);
-        const q = query(collection(db, "users"), where("email", "==", email), where("password", "==", password));
-        const snapshot = await getDocs(q);
-        
-        snapshot.forEach((doc) => {
-            console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
-          });
-      //var result = await auth.signInWithEmailAndPassword(email, password);
+        var authResult = await signInWithEmailAndPassword(auth, email, password);
+        if (authResult.user) {
+            const docRef = doc(db, "users", authResult.user.uid);
+            const docSnap = await getDoc(docRef);
+        }
     } catch (err) {
       console.error(err);
-      alert(err.message);
     }
   };
 
-  export {
-    // auth,
-    signInWithEmailAndPassword,
-  };
+export {
+auth,
+signIn as signInWithEmailAndPassword,
+};

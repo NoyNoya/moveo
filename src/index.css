@@ -52,7 +52,7 @@ body, html, .App, #root, .auth-wrapper {
   text-align: center;
   margin: 0;
   line-height: 1;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 .custom-control-label {

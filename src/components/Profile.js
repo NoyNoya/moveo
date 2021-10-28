@@ -14,7 +14,9 @@ export default function Profile() {
     //     // maybe trigger a loading screen
     //     return;
     //   }
-      if (!user) history.replace("/login");
+      if (!user) {
+          history.replace("/login");
+      }
     }, [user, loading]);
 
     return (

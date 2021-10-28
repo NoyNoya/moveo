@@ -41,7 +41,10 @@ export default function Login() {
             <button 
             type="submit" 
             className="btn btn-primary btn-block"
-            onClick={() => signInWithEmailAndPassword(email, password)}>Submit</button>
+            onClick={(e) => {
+                e.preventDefault();
+                signInWithEmailAndPassword(email, password);
+            }}>Log in</button>
             <p className="forgot-password text-right">
                 Forgot <a href="#">password?</a>
             </p>

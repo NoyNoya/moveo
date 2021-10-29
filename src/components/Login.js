@@ -34,7 +34,7 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)} 
                 required
                 autoFocus/>
-                <div class="requirements">
+                <div className="requirements">
                     Must be a valid email address.
                 </div>
             </div>
@@ -49,7 +49,7 @@ export default function Login() {
                 title="Password must contain at least 6 characters, including latters and numbers"
                 onChange={(e) => setPassword(e.target.value)} 
                 required/>
-                <div class="requirements">
+                <div className="requirements">
                 Password must contain at least 6 characters, including latters and numbers
                 </div>
             </div>

@@ -33,7 +33,7 @@ export default function Login() {
                 placeholder="Enter email" 
                 onChange={(e) => setEmail(e.target.value)} 
                 required
-                autofocus/>
+                autoFocus/>
                 <div class="requirements">
                     Must be a valid email address.
                 </div>

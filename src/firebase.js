@@ -27,19 +27,22 @@ const db = getFirestore(firebaseApp);
 
 const signIn = async (email, password) => {
     try {
-        var authResult = await signInWithEmailAndPassword(auth, email, password);
-        if (authResult.user) {
-            const docRef = doc(db, "users", authResult.user.uid);
-            const docSnap = await getDoc(docRef);
-        }
+        await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       console.error(err);
     }
   };
 const logOut = () => signOut(auth);
 
+const fetchUser = async (userId) => {
+  const docRef = doc(db, "users", userId);
+  const docSnap = await getDoc(docRef);
+  return docSnap.data();
+}
+
 export {
 auth,
 logOut,
+fetchUser,
 signIn as signInWithEmailAndPassword,
 };

@@ -2,3 +2,13 @@
     color:'##084298';
     font-weight: 100;
 }
+
+.image-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.image-title-container h2 {
+    width: calc(100% - 190px);
+    text-align: center;
+}

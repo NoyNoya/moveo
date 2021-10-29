@@ -20,13 +20,16 @@ export default function Profile() {
             }
             fetchExtendedUserInfo();
         }
-    }, [user, extendedUserInfo]);
+    }, []);
 
     if(user && extendedUserInfo){
         return (
             <form>
-                <h3>{extendedUserInfo.name}</h3>
-
+                <div class="image-title-container">
+                    <img src={extendedUserInfo.avatarUrl} alt={extendedUserInfo.name} className="rounded-circle" width="110"></img>
+                    <h2>{extendedUserInfo.name}</h2>
+                    <div></div>
+                </div>
                 <div className="form-group">
                     <label>Email address:</label>
                     <div className="user-property-value">{user.email}</div>

@@ -2,6 +2,7 @@ import React,{ useEffect, useState } from "react";
 import { signInWithEmailAndPassword, auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
+import './Login.css'
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -25,12 +26,32 @@ export default function Login() {
 
             <div className="form-group">
                 <label>Email address</label>
-                <input type="email" className="form-control" placeholder="Enter email" onChange={(e) => setEmail(e.target.value)}/>
+                <input 
+                type="email" 
+                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" 
+                className="form-control" 
+                placeholder="Enter email" 
+                onChange={(e) => setEmail(e.target.value)} 
+                required
+                autofocus/>
+                <div class="requirements">
+                    Must be a valid email address.
+                </div>
             </div>
 
             <div className="form-group">
                 <label>Password</label>
-                <input type="password" className="form-control" placeholder="Enter password" onChange={(e) => setPassword(e.target.value)}/>
+                <input 
+                type="password" 
+                pattern="(?=.*\d)(?=.*[A-z]).{6,20}" 
+                className="form-control" 
+                placeholder="Enter password"
+                title="Password must contain at least 6 characters, including latters and numbers"
+                onChange={(e) => setPassword(e.target.value)} 
+                required/>
+                <div class="requirements">
+                Password must contain at least 6 characters, including latters and numbers
+                </div>
             </div>
 
             <div className="form-group">
@@ -47,9 +68,6 @@ export default function Login() {
                 e.preventDefault();
                 signInWithEmailAndPassword(email, password);
             }}>Log in</button>
-            <p className="forgot-password text-right">
-                Forgot <a href="#">password?</a>
-            </p>
         </form>
     );
 }

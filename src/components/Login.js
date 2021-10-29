@@ -1,7 +1,7 @@
-import React,{ useEffect, useState, Component } from "react";
+import React,{ useEffect, useState } from "react";
 import { signInWithEmailAndPassword, auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
     const [email, setEmail] = useState("");

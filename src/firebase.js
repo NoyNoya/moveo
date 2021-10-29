@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -36,8 +36,10 @@ const signIn = async (email, password) => {
       console.error(err);
     }
   };
+const logOut = () => signOut(auth);
 
 export {
 auth,
+logOut,
 signIn as signInWithEmailAndPassword,
 };

@@ -1,5 +1,5 @@
 import React,{ useEffect, useState, Component } from "react";
-import { signInWithEmailAndPassword, auth } from "../firebase";
+import { logOut, auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory } from "react-router-dom";
 
@@ -20,6 +20,16 @@ export default function Profile() {
     }, [user, loading]);
 
     return (
-        <div>Hi all</div>
+        <div>
+            <div>Hi all</div>
+            
+            <button 
+            className="btn btn-primary btn-block"
+            onClick={(e) => {
+                e.preventDefault();
+                logOut();
+                history.replace("/login");
+            }}>Log out</button>
+        </div>        
     );
 }

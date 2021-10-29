@@ -1,11 +1,9 @@
-import React,{ useEffect, useState, Component } from "react";
-import { signInWithEmailAndPassword, auth } from "../firebase";
+import React,{ useState } from "react";
+import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function PageNotFound() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
 

@@ -18,3 +18,12 @@ form > div .requirements {
     font-style: italic;
     font-weight: 400;
 }
+
+.moveo-icon {
+    animation: icon-rotate 8s linear infinite;
+    animation-delay: 0ms;
+}
+
+@keyframes icon-rotate {
+    to{ transform: rotateY(360deg); }
+}

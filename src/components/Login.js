@@ -7,9 +7,10 @@ import './Login.css'
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isEnabled, setIsEnabled] = useState(true);
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
-
+    
     useEffect(() => {
     //   if (loading) {
     //     // maybe trigger a loading screen
@@ -20,13 +21,22 @@ export default function Login() {
       }
     }, [user, loading]);
 
+    var x = document.getElementById('emailInputElement');
     return (
         <form>
+            <img 
+            src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1469622513/pf5lnfgaaxe8sptd6dgk.png" 
+            alt="moveo" 
+            width="70"
+            className="moveo-icon"
+            ></img>
+            
             <h3>Sign In</h3>
 
             <div className="form-group">
                 <label>Email address</label>
                 <input 
+                id="emailInputElement"
                 type="email" 
                 pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" 
                 className="form-control" 
@@ -42,6 +52,7 @@ export default function Login() {
             <div className="form-group">
                 <label>Password</label>
                 <input 
+                id="passwordInputElement"
                 type="password" 
                 pattern="(?=.*\d)(?=.*[A-z]).{6,20}" 
                 className="form-control" 
@@ -64,6 +75,7 @@ export default function Login() {
             <button 
             type="submit" 
             className="btn btn-primary btn-block"
+            disabled={!isEnabled}
             onClick={(e) => {
                 e.preventDefault();
                 signInWithEmailAndPassword(email, password);

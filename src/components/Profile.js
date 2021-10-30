@@ -1,14 +1,21 @@
 import React,{ useEffect, useState } from "react";
-import { logOut, auth, fetchUser } from "../firebase";
+import { logOut, auth, fetchUser, updateDocument } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import './Profile.css';
-import { Home, Cake, AlternateEmail, Edit} from '@material-ui/icons';
+import { Home, Cake, HighlightOff, AlternateEmail, EditTwoTone, Done } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core';
 
 export default function Profile() {
     const [extendedUserInfo, setExtendedUserInfo] = useState(null);
+    const [isNameEditing, setIsNameEditing] = useState(false);
+    const [isBirthdateEditing, setIsBirthdateEditing] = useState(false);
+    const [isAddressEditing, setIsAddressEditing] = useState(false);
+    const [selectedDate, setSelectedDate] = useState(false);
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
+    const [address, setAddress] = useState("");
+    const [name, setName] = useState("");
 
     useEffect(() => {
         if (!user) {
@@ -21,20 +28,46 @@ export default function Profile() {
             }
             fetchExtendedUserInfo();
         }
-    }, []);
+    }, [name, address]);
+
+    const updateUser = async (updatedField) => {
+        await updateDocument(user.uid, updatedField);
+        setIsNameEditing(false);
+        setIsAddressEditing(false);
+        setIsBirthdateEditing(false);
+    }
 
     if(user && extendedUserInfo){
         return (
             <form>
-                <div class="image-title-container">
+                <div className="image-title-container">
                     <img src={extendedUserInfo.avatarUrl} alt={extendedUserInfo.name} className="rounded-circle" width="110"></img>
-                    <h2>{extendedUserInfo.name}</h2>
+
+
+                    {isNameEditing ? 
+                    <div className="edit-property-dialog">
+                        <input 
+                        className="form-control" 
+                        placeholder={extendedUserInfo.name} 
+                        onChange={(e) => setName(e.target.value)} 
+                        required
+                        autoFocus/>
+                        <IconButton size="small" title="Save" onClick={() => {
+                            updateUser({name});
+                            extendedUserInfo.name = name;
+                        }} color="primary"><Done/></IconButton>
+                        <IconButton size="small" title="Cancel" onClick={() => setIsNameEditing(false)} color="secondary"><HighlightOff/></IconButton>
+                    </div> :
+                    <h2>{extendedUserInfo.name}</h2>}
+
+
+                    {isNameEditing ? <div/> : <EditTwoTone title="Edit name" className="edit-icon" onClick={() => setIsNameEditing(true)}></EditTwoTone>}
                     <div></div>
                 </div>
                 <div className="form-group">
-                <div className="icon-label-container">
-                        <AlternateEmail></AlternateEmail>
-                        <label>Email:</label>
+                    <div className="icon-label-container">
+                            <AlternateEmail></AlternateEmail>
+                            <label>Email:</label>
                     </div>
                     <div className="user-property-value">{user.email}</div>
                 </div>
@@ -43,8 +76,24 @@ export default function Profile() {
                     <div className="icon-label-container">
                         <Home></Home>
                         <label>Address:</label>
+                        {isAddressEditing ? <div/> : <EditTwoTone title="Edit address" className="edit-icon" onClick={() => setIsAddressEditing(true)}></EditTwoTone>}
                     </div>
-                    <div className="user-property-value">{extendedUserInfo.address}</div>
+
+                    {isAddressEditing ? 
+                    <div className="edit-property-dialog">
+                        <input 
+                        className="form-control" 
+                        placeholder={extendedUserInfo.address} 
+                        onChange={(e) => setAddress(e.target.value)} 
+                        required
+                        autoFocus/>
+                        <IconButton size="small" title="Save" onClick={() => {
+                            updateUser({address});
+                            extendedUserInfo.address = address;
+                        }}><Done color="primary"/></IconButton>
+                        <IconButton size="small" title="Cancel" onClick={() => setIsAddressEditing(false)} color="secondary"><HighlightOff/></IconButton>
+                    </div> :
+                    <div className="user-property-value">{extendedUserInfo.address}</div>}
                 </div>
 
                 <div className="form-group">
@@ -52,6 +101,7 @@ export default function Profile() {
                         <Cake></Cake>
                         <label>Birth date:</label>
                     </div>
+                    
                     <div className="user-property-value">{new Date(extendedUserInfo.birthDate.seconds * 1000).toDateString()}</div>
                 </div>
 

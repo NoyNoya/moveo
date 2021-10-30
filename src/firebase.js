@@ -25,11 +25,12 @@ onAuthStateChanged(auth, user => {
 const db = getFirestore(firebaseApp);
 
 
-const signIn = async (email, password) => {
+const signIn = async (email, password, setShowUserNotFoundEror) => {
     try {
         await signInWithEmailAndPassword(auth, email, password);
     } catch (err) {
       console.error(err);
+      setShowUserNotFoundEror(true);
     }
   };
 const logOut = () => signOut(auth);

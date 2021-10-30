@@ -26,6 +26,16 @@ form > div .requirements {
     font-weight: 400;
 }
 
+.user-not-found-error-message {
+    color: white;
+    background-color: #e87c03;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
 .moveo-icon {
     animation: icon-rotate 8s linear infinite;
     animation-delay: 0ms;

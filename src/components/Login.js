@@ -11,6 +11,7 @@ export default function Login() {
     const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
+    const [showUserNotFoundEror, setShowUserNotFoundEror] = useState(false);
     
     useEffect(() => {
     //   if (loading) {
@@ -70,6 +71,7 @@ export default function Login() {
                 Password must contain at least 6 characters, including latters and numbers
                 </div>
             </div>
+            <div className={showUserNotFoundEror ? "user-not-found-error-message" : ""}>{showUserNotFoundEror ? "Sorry, we can't find an account with this email address. Please try again" : ""}</div>
 
             <div className="form-group">
                 <div className="custom-control custom-checkbox">
@@ -84,7 +86,7 @@ export default function Login() {
             disabled={isEmailValid === false || isPasswordValid == false}
             onClick={(e) => {
                 e.preventDefault();
-                signInWithEmailAndPassword(email, password);
+                signInWithEmailAndPassword(email, password, setShowUserNotFoundEror);
             }}>Log in</button>
         </form>
     );

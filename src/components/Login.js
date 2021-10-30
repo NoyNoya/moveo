@@ -7,7 +7,8 @@ import './Login.css'
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [isEnabled, setIsEnabled] = useState(true);
+    const [isEmailValid, setIsEmailValid] = useState(false);
+    const [isPasswordValid, setIsPasswordValid] = useState(false);
     const [user, loading, error] = useAuthState(auth);
     const history = useHistory();
     
@@ -21,7 +22,6 @@ export default function Login() {
       }
     }, [user, loading]);
 
-    var x = document.getElementById('emailInputElement');
     return (
         <form>
             <img 
@@ -41,7 +41,10 @@ export default function Login() {
                 pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" 
                 className="form-control" 
                 placeholder="Enter email" 
-                onChange={(e) => setEmail(e.target.value)} 
+                onChange={(e) => {
+                    setEmail(e.target.value);
+                    setIsEmailValid(e.target.checkValidity());
+                }} 
                 required
                 autoFocus/>
                 <div className="requirements">
@@ -58,7 +61,10 @@ export default function Login() {
                 className="form-control" 
                 placeholder="Enter password"
                 title="Password must contain at least 6 characters, including latters and numbers"
-                onChange={(e) => setPassword(e.target.value)} 
+                onChange={(e) => {
+                    setPassword(e.target.value);
+                    setIsPasswordValid(e.target.checkValidity());                
+                }}
                 required/>
                 <div className="requirements">
                 Password must contain at least 6 characters, including latters and numbers
@@ -75,7 +81,7 @@ export default function Login() {
             <button 
             type="submit" 
             className="btn btn-primary btn-block"
-            disabled={!isEnabled}
+            disabled={isEmailValid === false || isPasswordValid == false}
             onClick={(e) => {
                 e.preventDefault();
                 signInWithEmailAndPassword(email, password);

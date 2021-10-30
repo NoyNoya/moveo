@@ -12,7 +12,7 @@ form > div > input[type="text"]:invalid:focus:not(:placeholder-shown) ~ .require
 form > div > input[type="email"]:invalid:focus:not(:placeholder-shown) ~ .requirements,
 form > div > input[type="password"]:invalid:focus:not(:placeholder-shown) ~ .requirements {
     max-height: 200px;
-    padding: 0 30px 20px 5px;
+    padding: 0 30px 10px 5px;
 }
 
 form > div .requirements {

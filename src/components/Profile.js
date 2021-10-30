@@ -36,7 +36,7 @@ export default function Profile() {
 
     if(user && extendedUserInfo){
         return (
-            <form>
+            <form className="profile-form">
                 <div className="image-title-container">
                     <img src={extendedUserInfo.avatarUrl} alt={extendedUserInfo.name} className="rounded-circle" width="110"></img>
 

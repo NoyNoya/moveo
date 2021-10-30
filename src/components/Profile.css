@@ -20,7 +20,7 @@
     flex-direction: column;
 }
 
-.form-group:hover {
+.profile-form .form-group:hover {
     background-color: rgba(32, 33, 37, 0.04);
 }
 

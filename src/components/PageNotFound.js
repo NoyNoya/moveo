@@ -1,11 +1,11 @@
-import React,{ useState } from "react";
+import React from "react";
 import { auth } from "../firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import './PageNotFound.css';
 
 export default function PageNotFound() {
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const history = useHistory();
 
     return (

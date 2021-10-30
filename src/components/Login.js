@@ -9,7 +9,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [isEmailValid, setIsEmailValid] = useState(false);
     const [isPasswordValid, setIsPasswordValid] = useState(false);
-    const [user, loading, error] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
     const history = useHistory();
     const [showUserNotFoundEror, setShowUserNotFoundEror] = useState(false);
     
@@ -83,7 +83,7 @@ export default function Login() {
             <button 
             type="submit" 
             className="btn btn-primary btn-block"
-            disabled={isEmailValid === false || isPasswordValid == false}
+            disabled={isEmailValid === false || isPasswordValid === false}
             onClick={(e) => {
                 e.preventDefault();
                 signInWithEmailAndPassword(email, password, setShowUserNotFoundEror);

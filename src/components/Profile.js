@@ -9,10 +9,8 @@ import { IconButton } from '@material-ui/core';
 export default function Profile() {
     const [extendedUserInfo, setExtendedUserInfo] = useState(null);
     const [isNameEditing, setIsNameEditing] = useState(false);
-    const [isBirthdateEditing, setIsBirthdateEditing] = useState(false);
     const [isAddressEditing, setIsAddressEditing] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(false);
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
     const history = useHistory();
     const [address, setAddress] = useState("");
     const [name, setName] = useState("");
@@ -28,13 +26,12 @@ export default function Profile() {
             }
             fetchExtendedUserInfo();
         }
-    }, [name, address]);
+    }, [name, address,history, user]);
 
     const updateUser = async (updatedField) => {
         await updateDocument(user.uid, updatedField);
         setIsNameEditing(false);
         setIsAddressEditing(false);
-        setIsBirthdateEditing(false);
     }
 
     if(user && extendedUserInfo){

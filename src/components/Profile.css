@@ -24,6 +24,14 @@
     background-color: rgba(32, 33, 37, 0.04);
 }
 
+.icon-label-container {
+    display: flex;
+}
+
+.icon-label-container label {
+    margin-left: 5px;
+}
+
 /* Media queries */
 @media (min-width:480px){
     .image-title-container {

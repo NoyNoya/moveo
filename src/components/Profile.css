@@ -15,6 +15,10 @@
         text-align: center;
 }
 
+.logout-button-container {
+    display: flex;
+    flex-direction: column;
+}
 
 /* Media queries */
 @media (min-width:480px){

@@ -45,7 +45,7 @@ export default function Profile() {
                     <div className="user-property-value">{extendedUserInfo.address}</div>
                 </div>
 
-                <div>
+                <div className="logout-button-container">
                     <button 
                     className="btn btn-primary btn-block"
                     onClick={(e) => {

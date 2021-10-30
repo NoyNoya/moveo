@@ -21,7 +21,7 @@ export default function Login() {
       if (user) {
           history.replace("/profile");
       }
-    }, [user, loading]);
+    }, [user, loading, history]);
 
     return (
         <form>

@@ -20,6 +20,10 @@
     flex-direction: column;
 }
 
+.form-group:hover {
+    background-color: rgba(32, 33, 37, 0.04);
+}
+
 /* Media queries */
 @media (min-width:480px){
     .image-title-container {

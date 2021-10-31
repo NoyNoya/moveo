@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app"
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { doc, getDoc, getFirestore } from "firebase/firestore/lite";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore/lite";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -41,9 +41,15 @@ const fetchUser = async (userId) => {
   return docSnap.data();
 }
 
+const updateDocument = async (uid, updatedData) => {
+  const docRef = doc(db, "users", uid);
+  return await setDoc(docRef, updatedData, { merge: true });
+}
+
 export {
-auth,
-logOut,
-fetchUser,
-signIn as signInWithEmailAndPassword,
+  updateDocument,
+  auth,
+  logOut,
+  fetchUser,
+  signIn as signInWithEmailAndPassword,
 };

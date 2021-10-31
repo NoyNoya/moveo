@@ -15,6 +15,41 @@
         text-align: center;
 }
 
+.logout-button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-form .form-group:hover {
+    background-color: rgba(32, 33, 37, 0.04);
+}
+
+.icon-label-container {
+    display: flex;
+}
+
+.icon-label-container label {
+    margin-left: 5px;
+    flex: 1
+}
+
+.edit-icon {
+    opacity: 0;
+}
+
+.image-title-container .edit-property-dialog {
+    margin-left: 10px;
+}
+
+.edit-property-dialog {
+    display: flex;
+}
+
+.image-title-container:hover .edit-icon,
+.form-group:hover .edit-icon{
+    cursor: pointer;
+    opacity: 1;
+}
 
 /* Media queries */
 @media (min-width:480px){
